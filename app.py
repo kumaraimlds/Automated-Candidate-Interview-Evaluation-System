@@ -24,8 +24,12 @@ templates = Jinja2Templates(directory="templates")
 
 
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-model_client = OpenAIChatCompletionClient(model="gpt-4o", api_key=OPENAI_API_KEY)
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+model_client = OpenAIChatCompletionClient(
+    model="llama-3.3-70b-versatile",
+    api_key=GROQ_API_KEY,
+    base_url="https://api.groq.com/openai/v1"
+)
 
 
 
@@ -90,7 +94,6 @@ async def create_interview_team(websocket: WebSocket, job_position: str):
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    # Render the index.html template
     return templates.TemplateResponse("index.html", {"request": request})
 
 
