@@ -94,7 +94,8 @@ async def create_interview_team(websocket: WebSocket, job_position: str):
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    context = {"request": request}
+    return templates.TemplateResponse("index.html", context)
 
 
 @app.websocket("/ws/interview")
